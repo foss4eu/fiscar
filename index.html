@@ -159,8 +159,8 @@
                     co2Percentage = 5.5 + ((co2Emissions - referenceCO2) * 0.1);
                 }
                 
-                // Calculate ATN
-                const atn = vehicleCost * (6/7) * agePercentage * (co2Percentage / 100);
+                // Calculate ATN with minimum of 1600€
+                const atn = Math.max(1600, vehicleCost * (6/7) * agePercentage * (co2Percentage / 100);
                 const totalCost = vehicleCost - taxSavings + atn + solidarityTax;
 
                 totalTaxSavings += taxSavings;
