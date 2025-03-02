@@ -89,9 +89,7 @@
 
         function updateCO2Field() {
             const vehicleType = document.getElementById('vehicleType').value;
-            const co2Emissions = vehicleType === 'hybrid' ? 102 : 
-                               vehicleType === 'electric' ? 0 : 
-                               parseFloat(document.getElementById('co2Emissions').value);
+            const co2Emissions = parseFloat(document.getElementById('co2Emissions').value);
             const co2Field = document.getElementById('co2Field');
             const co2Input = document.getElementById('co2Emissions');
 
@@ -101,9 +99,12 @@
                 co2Input.disabled = true;
             } else if (vehicleType === 'thermal') {
                 co2Field.style.display = 'block';
+                co2Input.value = 200;
                 co2Input.disabled = false;
-            } else {
-                co2Field.style.display = 'none';
+            } else if (vehicleType === 'hybrid') {
+                co2Field.style.display = 'block';
+                co2Input.value = 102;
+                co2Input.disabled = false;
             }
         }
 
