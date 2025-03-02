@@ -145,7 +145,17 @@
                 const taxWithoutDeduction = turnover * taxRate;
                 const taxWithDeduction = taxableIncome * taxRate;
                 const taxSavings = taxWithoutDeduction - taxWithDeduction;
-                const atn = vehicleCost * atnRate * (6/7);
+                // Calculate age percentage
+                const agePercentages = [1.00, 0.94, 0.88, 0.82, 0.76];
+                const agePercentage = agePercentages[i];
+                
+                // Calculate CO2 percentage
+                const referenceCO2 = 78; // Reference CO2 for petrol cars
+                const co2Emissions = parseFloat(document.getElementById('co2Emissions').value);
+                const co2Percentage = 5.5 + ((co2Emissions - referenceCO2) * 0.1);
+                
+                // Calculate ATN
+                const atn = vehicleCost * (6/7) * agePercentage * (co2Percentage / 100);
                 const totalCost = vehicleCost - taxSavings + atn + solidarityTax;
 
                 totalTaxSavings += taxSavings;
