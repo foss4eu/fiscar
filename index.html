@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belgium Tax Savings Calculator</title>
+    <title>Belgium Tax Savings Simulator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,7 +58,7 @@
         </div>
 
     <div class="container">
-        <h1>Belgium Tax Savings Calculator</h1>
+        <h1>Belgium Tax Savings Simulator</h1>
         <label for="vehicleCost">Vehicle Amount (€):</label>
         <input type="number" id="vehicleCost" placeholder="Vehicle amount" value="50000">
 
@@ -169,7 +169,6 @@
                     results += `<hr>`;
                 }
                 results += `<h3>Year ${2025 + i}</h3>
-                            <p>Cumulative tax savings: ${formatEuros(totalTaxSavings)} €</p>
                             <p>Tax deduction: ${formatEuros(deduction)} €</p>
                             <p>Depreciation: ${formatEuros(amortization)} €</p>
                             <p>Taxable income: ${formatEuros(taxableIncome)} €</p>
@@ -178,7 +177,9 @@
                             <p><b>Tax savings: ${formatEuros(taxSavings)} €</b></p>
                             <p>ATN: ${formatEuros(atn)} €</p>
                             <p>Solidarity contribution: ${formatEuros(solidarityTax)} €</p>
-                            <p>Total cost for the company: ${formatEuros(totalCost)} €</p>`;
+                            <p>Total cost for the company: ${formatEuros(totalCost)} €</p>
+                            <p>Cumulative tax savings: ${formatEuros(totalTaxSavings)} €</p>
+                            `;
             }
 
             results += `<h2>Total tax savings over 5 years: ${formatEuros(totalTaxSavings)} €</h2>`;
