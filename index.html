@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculateur d'Économies d'Impôt</title>
+    <title>Belgium Tax Savings Calculator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,25 +54,25 @@
 </head>
 <body>
         <div style="text-align: center;">
-            <img src="logo.jpg" alt="Logo" style="max-width: 200px; margin-bottom: 20px;">
+            <img src="logo.jpg" alt="Logo" style="max-width: 300px; margin-bottom: 20px;">
         </div>
 
     <div class="container">
-        <h1>Calculateur d'Économies d'Impôt</h1>
-        <label for="vehicleCost">Montant du véhicule (€) :</label>
-        <input type="number" id="vehicleCost" placeholder="Montant du véhicule" value="50000">
+        <h1>Belgium Tax Savings Calculator</h1>
+        <label for="vehicleCost">Vehicle Amount (€):</label>
+        <input type="number" id="vehicleCost" placeholder="Vehicle amount" value="50000">
 
-        <label for="turnover">Chiffre d'affaires (€) :</label>
-        <input type="number" id="turnover" placeholder="Chiffre d'affaires" value="100000">
+        <label for="turnover">Turnover (€):</label>
+        <input type="number" id="turnover" placeholder="Turnover" value="100000">
 
-        <label for="vehicleType">Type de véhicule :</label>
+        <label for="vehicleType">Vehicle Type:</label>
         <select id="vehicleType">
-            <option value="electric">Électrique</option>
-            <option value="hybrid">Hybride (102g CO2)</option>
-            <option value="thermal">Thermique (200g CO2)</option>
+            <option value="electric">Electric</option>
+            <option value="hybrid">Hybrid (102g CO2)</option>
+            <option value="thermal">Thermal (200g CO2)</option>
         </select>
 
-        <button onclick="calculateTaxSavings()">Calculer</button>
+        <button onclick="calculateTaxSavings()">Calculate</button>
 
         <div class="result" id="result"></div>
     </div>
@@ -89,17 +89,17 @@
 
             switch (vehicleType) {
                 case 'electric':
-                    deductionRates = [1.00, 1.00, 1.00];
+                    deductionRates = [1.00, 1.00, 1.00, 1.00, 1.00];
                     atnRate = 0.04;
                     solidarityTax = 376.08;
                     break;
                 case 'hybrid':
-                    deductionRates = [0.75, 0.50, 0.25];
+                    deductionRates = [0.75, 0.50, 0.25, 0, 0];
                     atnRate = 0.075;
                     solidarityTax = 140.88;
                     break;
                 case 'thermal':
-                    deductionRates = [0.75, 0.50, 0.25];
+                    deductionRates = [0.75, 0.50, 0.25, 0, 0];
                     atnRate = 0.18;
                     solidarityTax = 273.36;
                     break;
@@ -108,8 +108,8 @@
             let results = '';
             let totalTaxSavings = 0;
 
-            for (let i = 0; i < 3; i++) {
-                const deduction = vehicleCost * deductionRates[i];
+            for (let i = 0; i < 5; i++) {
+                const deduction = vehicleCost / 5 * deductionRates[i];
                 const amortization = vehicleCost / 5;
                 const taxableIncome = turnover - deduction - amortization;
                 const taxWithoutDeduction = turnover * taxRate;
@@ -120,19 +120,19 @@
 
                 totalTaxSavings += taxSavings;
 
-                results += `<h3>Année ${2025 + i}</h3>
-                            <p>Déduction fiscale : ${deduction.toFixed(2)} €</p>
-                            <p>Amortissement : ${amortization.toFixed(2)} €</p>
-                            <p>Revenu imposable : ${taxableIncome.toFixed(2)} €</p>
-                            <p>Impôt sans déduction : ${taxWithoutDeduction.toFixed(2)} €</p>
-                            <p>Impôt avec déduction : ${taxWithDeduction.toFixed(2)} €</p>
-                            <p>Économie d'impôt : ${taxSavings.toFixed(2)} €</p>
-                            <p>ATN : ${atn.toFixed(2)} €</p>
-                            <p>Cotisation de solidarité : ${solidarityTax.toFixed(2)} €</p>
-                            <p>Coût total pour la société : ${totalCost.toFixed(2)} €</p>`;
+                results += `<h3>Year ${2025 + i}</h3>
+                            <p>Tax deduction: ${deduction.toFixed(2)} €</p>
+                            <p>Depreciation: ${amortization.toFixed(2)} €</p>
+                            <p>Taxable income: ${taxableIncome.toFixed(2)} €</p>
+                            <p>Tax without deduction: ${taxWithoutDeduction.toFixed(2)} €</p>
+                            <p>Tax with deduction: ${taxWithDeduction.toFixed(2)} €</p>
+                            <p>Tax savings: ${taxSavings.toFixed(2)} €</p>
+                            <p>ATN: ${atn.toFixed(2)} €</p>
+                            <p>Solidarity contribution: ${solidarityTax.toFixed(2)} €</p>
+                            <p>Total cost for the company: ${totalCost.toFixed(2)} €</p>`;
             }
 
-            results += `<h2>Économie d'impôt totale sur 3 ans : ${totalTaxSavings.toFixed(2)} €</h2>`;
+            results += `<h2>Total tax savings over 5 years: ${totalTaxSavings.toFixed(2)} €</h2>`;
             document.getElementById('result').innerHTML = results;
         }
 
