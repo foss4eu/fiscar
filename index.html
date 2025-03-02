@@ -173,7 +173,7 @@
                 const netTaxSavings = taxSavings - atnTax;
                 const totalCost = vehicleCost - netTaxSavings + atn + solidarityTax;
 
-                totalTaxSavings += taxSavings;
+                totalTaxSavings += netTaxSavings;
 
                 if (i > 0) {
                     results += `<hr>`;
