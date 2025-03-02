@@ -121,18 +121,18 @@
                 totalTaxSavings += taxSavings;
 
                 results += `<h3>Year ${2025 + i}</h3>
-                            <p>Tax deduction: ${deduction.toFixed(2)} €</p>
-                            <p>Depreciation: ${amortization.toFixed(2)} €</p>
-                            <p>Taxable income: ${taxableIncome.toFixed(2)} €</p>
-                            <p>Tax without deduction: ${taxWithoutDeduction.toFixed(2)} €</p>
-                            <p>Tax with deduction: ${taxWithDeduction.toFixed(2)} €</p>
-                            <p>Tax savings: ${taxSavings.toFixed(2)} €</p>
-                            <p>ATN: ${atn.toFixed(2)} €</p>
-                            <p>Solidarity contribution: ${solidarityTax.toFixed(2)} €</p>
-                            <p>Total cost for the company: ${totalCost.toFixed(2)} €</p>`;
+                            <p>Tax deduction: ${Math.floor(deduction)} €</p>
+                            <p>Depreciation: ${Math.floor(amortization)} €</p>
+                            <p>Taxable income: ${Math.floor(taxableIncome)} €</p>
+                            <p>Tax without deduction: ${Math.floor(taxWithoutDeduction)} €</p>
+                            <p>Tax with deduction: ${Math.floor(taxWithDeduction)} €</p>
+                            <p>Tax savings: ${Math.floor(taxSavings)} €</p>
+                            <p>ATN: ${Math.floor(atn)} €</p>
+                            <p>Solidarity contribution: ${Math.floor(solidarityTax)} €</p>
+                            <p>Total cost for the company: ${Math.floor(totalCost)} €</p>`;
             }
 
-            results += `<h2>Total tax savings over 5 years: ${totalTaxSavings.toFixed(2)} €</h2>`;
+            results += `<h2>Total tax savings over 5 years: ${Math.floor(totalTaxSavings)} €</h2>`;
             document.getElementById('result').innerHTML = results;
         }
 
