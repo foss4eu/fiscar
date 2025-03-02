@@ -72,6 +72,9 @@
             <option value="thermal">Thermal</option>
         </select>
 
+        <label for="years">Number of Years:</label>
+        <input type="number" id="years" min="1" max="10" value="5">
+
         <div id="co2Field" style="display: none;">
             <label for="co2Emissions">CO2 Emissions (g/km):</label>
             <input type="number" id="co2Emissions" placeholder="CO2 emissions" value="200">
@@ -138,7 +141,8 @@
             let results = '';
             let totalTaxSavings = 0;
 
-            for (let i = 0; i < 5; i++) {
+            const years = parseInt(document.getElementById('years').value);
+            for (let i = 0; i < years; i++) {
                 const deduction = vehicleCost / 5 * deductionRates[i];
                 const amortization = vehicleCost / 5;
                 const taxableIncome = turnover - deduction - amortization;
@@ -182,7 +186,7 @@
                             `;
             }
 
-            results += `<h2>Total tax savings over 5 years: ${formatEuros(totalTaxSavings)} €</h2>`;
+            results += `<h2>Total tax savings over ${years} years: ${formatEuros(totalTaxSavings)} €</h2>`;
             document.getElementById('result').innerHTML = results;
         }
 
