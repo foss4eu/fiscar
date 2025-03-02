@@ -88,6 +88,10 @@
         <div class="result" id="result"></div>
     </div>
 
+    <!-- MathJax configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <script>
         function formatEuros(amount) {
             return Math.floor(amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -201,6 +205,55 @@
         // Pré-remplir et calculer automatiquement
         window.onload = calculateTaxSavings;
     </script>
+
+    <div class="container" style="margin-top: 40px;">
+        <h2>Documentation</h2>
+        <h3>Key Calculations</h3>
+        
+        <h4>1. Tax Deduction</h4>
+        <p>\[
+        \text{Deduction} = \frac{\text{Vehicle Cost}}{\text{Years}} \times \text{Deduction Rate}
+        \]</p>
+        <p>Deduction rates vary by vehicle type and year.</p>
+
+        <h4>2. Depreciation</h4>
+        <p>\[
+        \text{Depreciation} = \frac{\text{Vehicle Cost}}{\text{Years}}
+        \]</p>
+
+        <h4>3. Taxable Income</h4>
+        <p>\[
+        \text{Taxable Income} = \text{Turnover} - \text{Deduction} - \text{Depreciation}
+        \]</p>
+
+        <h4>4. Tax Savings</h4>
+        <p>\[
+        \text{Tax Savings} = (\text{Turnover} \times \text{Tax Rate}) - (\text{Taxable Income} \times \text{Tax Rate})
+        \]</p>
+
+        <h4>5. ATN Calculation</h4>
+        <p>\[
+        \text{ATN} = \max\left(1600,\ \frac{6}{7} \times \text{Vehicle Cost} \times \text{Age Percentage} \times \frac{\text{CO2 Percentage}}{100}\right)
+        \]</p>
+        <p>Where CO2 percentage is calculated as:</p>
+        <p>\[
+        \text{CO2 Percentage} = 
+        \begin{cases}
+        4\% & \text{for electric vehicles} \\
+        5.5 + 0.1 \times (\text{CO2 Emissions} - 78) & \text{otherwise}
+        \end{cases}
+        \]</p>
+
+        <h4>6. Net Tax Savings</h4>
+        <p>\[
+        \text{Net Tax Savings} = \text{Tax Savings} - (\text{ATN} \times \text{Tax Rate})
+        \]</p>
+
+        <h4>7. Total Cost</h4>
+        <p>\[
+        \text{Total Cost} = \text{Vehicle Cost} - \text{Net Tax Savings} + \text{ATN} + \text{Solidarity Tax}
+        \]</p>
+    </div>
 </body>
 </html>
 
