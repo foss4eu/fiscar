@@ -160,7 +160,7 @@
                 }
                 
                 // Calculate ATN with minimum of 1600€
-                const atn = Math.max(1600, vehicleCost * (6/7) * agePercentage * (co2Percentage / 100);
+                const atn = Math.max(1600, vehicleCost * (6/7) * agePercentage * (co2Percentage / 100));
                 const totalCost = vehicleCost - taxSavings + atn + solidarityTax;
 
                 totalTaxSavings += taxSavings;
@@ -174,7 +174,7 @@
                             <p>Taxable income: ${formatEuros(taxableIncome)} €</p>
                             <p>Tax without deduction: ${formatEuros(taxWithoutDeduction)} €</p>
                             <p>Tax with deduction: ${formatEuros(taxWithDeduction)} €</p>
-                            <p>Tax savings: ${formatEuros(taxSavings)} €</p>
+                            <p><b>Tax savings: ${formatEuros(taxSavings)} €</b></p>
                             <p>ATN: ${formatEuros(atn)} €</p>
                             <p>Solidarity contribution: ${formatEuros(solidarityTax)} €</p>
                             <p>Total cost for the company: ${formatEuros(totalCost)} €</p>`;
