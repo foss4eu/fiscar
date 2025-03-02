@@ -66,11 +66,16 @@
         <input type="number" id="turnover" placeholder="Turnover" value="100000">
 
         <label for="vehicleType">Vehicle Type:</label>
-        <select id="vehicleType">
+        <select id="vehicleType" onchange="updateCO2Field()">
             <option value="electric">Electric</option>
             <option value="hybrid">Hybrid (102g CO2)</option>
-            <option value="thermal">Thermal (200g CO2)</option>
+            <option value="thermal">Thermal</option>
         </select>
+
+        <div id="co2Field" style="display: none;">
+            <label for="co2Emissions">CO2 Emissions (g/km):</label>
+            <input type="number" id="co2Emissions" placeholder="CO2 emissions" value="200">
+        </div>
 
         <button onclick="calculateTaxSavings()">Calculate</button>
 
@@ -80,6 +85,26 @@
     <script>
         function formatEuros(amount) {
             return Math.floor(amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+
+        function updateCO2Field() {
+            const vehicleType = document.getElementById('vehicleType').value;
+            const co2Emissions = vehicleType === 'hybrid' ? 102 : 
+                               vehicleType === 'electric' ? 0 : 
+                               parseFloat(document.getElementById('co2Emissions').value);
+            const co2Field = document.getElementById('co2Field');
+            const co2Input = document.getElementById('co2Emissions');
+
+            if (vehicleType === 'electric') {
+                co2Field.style.display = 'block';
+                co2Input.value = 0;
+                co2Input.disabled = true;
+            } else if (vehicleType === 'thermal') {
+                co2Field.style.display = 'block';
+                co2Input.disabled = false;
+            } else {
+                co2Field.style.display = 'none';
+            }
         }
 
         function calculateTaxSavings() {
