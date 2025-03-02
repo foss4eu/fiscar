@@ -150,9 +150,14 @@
                 const agePercentage = agePercentages[i];
                 
                 // Calculate CO2 percentage
-                const referenceCO2 = 78; // Reference CO2 for petrol cars
-                const co2Emissions = parseFloat(document.getElementById('co2Emissions').value);
-                const co2Percentage = 5.5 + ((co2Emissions - referenceCO2) * 0.1);
+                let co2Percentage;
+                if (vehicleType === 'electric') {
+                    co2Percentage = 4; // Fixed 4% for electric vehicles
+                } else {
+                    const referenceCO2 = 78; // Reference CO2 for petrol cars
+                    const co2Emissions = parseFloat(document.getElementById('co2Emissions').value);
+                    co2Percentage = 5.5 + ((co2Emissions - referenceCO2) * 0.1);
+                }
                 
                 // Calculate ATN
                 const atn = vehicleCost * (6/7) * agePercentage * (co2Percentage / 100);
