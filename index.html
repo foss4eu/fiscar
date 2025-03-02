@@ -124,6 +124,9 @@
 
                 totalTaxSavings += taxSavings;
 
+                if (i > 0) {
+                    results += `<hr>`;
+                }
                 results += `<h3>Year ${2025 + i}</h3>
                             <p>Tax deduction: ${formatEuros(deduction)} €</p>
                             <p>Depreciation: ${formatEuros(amortization)} €</p>
