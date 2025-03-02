@@ -143,8 +143,8 @@
 
             const years = parseInt(document.getElementById('years').value);
             for (let i = 0; i < years; i++) {
-                const deduction = vehicleCost / 5 * deductionRates[i];
-                const amortization = vehicleCost / 5;
+                const deduction = vehicleCost / years * deductionRates[i];
+                const amortization = vehicleCost / years;
                 const taxableIncome = turnover - deduction - amortization;
                 const taxWithoutDeduction = turnover * taxRate;
                 const taxWithDeduction = taxableIncome * taxRate;
