@@ -74,23 +74,23 @@
             const turnover = parseFloat(document.getElementById('turnover').value);
             const vehicleType = document.getElementById('vehicleType').value;
             const taxRate = 0.25;
-            let deductionRate = 0;
+            let deductionRates = [];
             let atnRate = 0;
             let solidarityTax = 0;
 
             switch (vehicleType) {
                 case 'electric':
-                    deductionRate = 1.00;
+                    deductionRates = [1.00, 1.00, 1.00];
                     atnRate = 0.04;
                     solidarityTax = 376.08;
                     break;
                 case 'hybrid':
-                    deductionRate = 0.75;
+                    deductionRates = [0.75, 0.50, 0.25];
                     atnRate = 0.075;
                     solidarityTax = 140.88;
                     break;
                 case 'thermal':
-                    deductionRate = 0.75;
+                    deductionRates = [0.75, 0.50, 0.25];
                     atnRate = 0.18;
                     solidarityTax = 273.36;
                     break;
@@ -98,11 +98,11 @@
 
             let results = '';
             let totalTaxSavings = 0;
-            const amortization = vehicleCost / 5;
 
-            for (let i = 0; i < 5; i++) {
-                const deduction = vehicleCost * deductionRate;
-                const taxableIncome = turnover - (deduction / 5) - amortization;
+            for (let i = 0; i < 3; i++) {
+                const deduction = vehicleCost * deductionRates[i];
+                const amortization = vehicleCost / 5;
+                const taxableIncome = turnover - deduction - amortization;
                 const taxWithoutDeduction = turnover * taxRate;
                 const taxWithDeduction = taxableIncome * taxRate;
                 const taxSavings = taxWithoutDeduction - taxWithDeduction;
@@ -112,7 +112,7 @@
                 totalTaxSavings += taxSavings;
 
                 results += `<h3>Année ${2025 + i}</h3>
-                            <p>Déduction fiscale : ${(deduction / 5).toFixed(2)} €</p>
+                            <p>Déduction fiscale : ${deduction.toFixed(2)} €</p>
                             <p>Amortissement : ${amortization.toFixed(2)} €</p>
                             <p>Revenu imposable : ${taxableIncome.toFixed(2)} €</p>
                             <p>Impôt sans déduction : ${taxWithoutDeduction.toFixed(2)} €</p>
@@ -123,7 +123,7 @@
                             <p>Coût total pour la société : ${totalCost.toFixed(2)} €</p>`;
             }
 
-            results += `<h2>Économie d'impôt totale sur 5 ans : ${totalTaxSavings.toFixed(2)} €</h2>`;
+            results += `<h2>Économie d'impôt totale sur 3 ans : ${totalTaxSavings.toFixed(2)} €</h2>`;
             document.getElementById('result').innerHTML = results;
         }
 
