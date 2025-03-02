@@ -78,6 +78,10 @@
     </div>
 
     <script>
+        function formatEuros(amount) {
+            return Math.floor(amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+
         function calculateTaxSavings() {
             const vehicleCost = parseFloat(document.getElementById('vehicleCost').value);
             const turnover = parseFloat(document.getElementById('turnover').value);
@@ -121,18 +125,18 @@
                 totalTaxSavings += taxSavings;
 
                 results += `<h3>Year ${2025 + i}</h3>
-                            <p>Tax deduction: ${Math.floor(deduction)} €</p>
-                            <p>Depreciation: ${Math.floor(amortization)} €</p>
-                            <p>Taxable income: ${Math.floor(taxableIncome)} €</p>
-                            <p>Tax without deduction: ${Math.floor(taxWithoutDeduction)} €</p>
-                            <p>Tax with deduction: ${Math.floor(taxWithDeduction)} €</p>
-                            <p>Tax savings: ${Math.floor(taxSavings)} €</p>
-                            <p>ATN: ${Math.floor(atn)} €</p>
-                            <p>Solidarity contribution: ${Math.floor(solidarityTax)} €</p>
-                            <p>Total cost for the company: ${Math.floor(totalCost)} €</p>`;
+                            <p>Tax deduction: ${formatEuros(deduction)} €</p>
+                            <p>Depreciation: ${formatEuros(amortization)} €</p>
+                            <p>Taxable income: ${formatEuros(taxableIncome)} €</p>
+                            <p>Tax without deduction: ${formatEuros(taxWithoutDeduction)} €</p>
+                            <p>Tax with deduction: ${formatEuros(taxWithDeduction)} €</p>
+                            <p>Tax savings: ${formatEuros(taxSavings)} €</p>
+                            <p>ATN: ${formatEuros(atn)} €</p>
+                            <p>Solidarity contribution: ${formatEuros(solidarityTax)} €</p>
+                            <p>Total cost for the company: ${formatEuros(totalCost)} €</p>`;
             }
 
-            results += `<h2>Total tax savings over 5 years: ${Math.floor(totalTaxSavings)} €</h2>`;
+            results += `<h2>Total tax savings over 5 years: ${formatEuros(totalTaxSavings)} €</h2>`;
             document.getElementById('result').innerHTML = results;
         }
 
